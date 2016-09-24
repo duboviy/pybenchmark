@@ -1,2 +1,21 @@
 # Covers JetBrains PyCharm IDE project files (user-specific stuff):
 .idea/
+
+# Compiled python modules.
+*.py[cod]
+
+# Setuptools distribution folder.
+build/
+dist/
+docs/_build/
+MANIFEST
+
+# Python egg metadata, regenerated from source
+*.egg
+/*.egg-info
+pip.egg-info/
+
+*~
+.coverage
+coverage.xml
+.tox
