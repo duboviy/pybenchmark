@@ -2,5 +2,5 @@
 
 # A Guppy-PE Primer (http://guppy-pe.sourceforge.net) is a framework that provides a
 # memory profiler called Heap, among other features.
-guppy
+# guppy     # temporary disabled because it's not installing on Travis CI py versions > 2.7
 nose
