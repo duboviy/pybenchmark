@@ -16,12 +16,12 @@ timer = time.clock if sys.platform == 'win32' else time.time
 # and the time used to perform the benchmark, result depends on the hardware.
 BENCHTIME, PYSTONES = pystone.pystones()
 KPYSTONES = PYSTONES / 1000.0
-STATS = {}
+stats = {}
 
 # _INIT_MEM_SIZE = 12     # 12 corresponds to the initial memory size after a setref call
 
 
-def profile(name='stats', stats=STATS):
+def profile(name='stats', stats=stats):
     """Calculates a duration and a memory size."""
     def _profile(function):
         def __profile(*args, **kw):
@@ -52,4 +52,4 @@ if __name__ == '__main__':
     some_code = lambda: time.sleep(0.1)   # callable that will be decorated and measured
     decorated = profile('example_of_usage')(some_code)  # a la-carte decoration
     return_value = decorated()            # actual run/call of decorated callable
-    print(STATS)
+    print(stats)

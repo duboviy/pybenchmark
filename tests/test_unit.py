@@ -1,7 +1,7 @@
 import time
 from nose.tools import with_setup
 
-from pybenchmark import profile, STATS, KPYSTONES
+from pybenchmark import profile, stats, KPYSTONES
 
 
 POSITIVE_BENCHMARK_TIME = 0.1  # sec
@@ -23,28 +23,28 @@ def setup_negative_fixture():
 
 @with_setup(setup_positive_fixture)
 def test_dict_keys():
-    assert 'test' in STATS
-    assert isinstance(STATS['test'], dict)
-    assert 'time' in STATS['test']
-    assert 'kstones' in STATS['test']
-    # assert 'memory' in STATS['test']
+    assert 'test' in stats
+    assert isinstance(stats['test'], dict)
+    assert 'time' in stats['test']
+    assert 'kstones' in stats['test']
+    # assert 'memory' in stats['test']
 
 
 @with_setup(setup_positive_fixture)
 def test_dict_values():
-    assert isinstance(STATS['test']['time'], float)
-    assert isinstance(STATS['test']['kstones'], float)
-    # assert isinstance(STATS['test']['memory'], float)
-    assert STATS['test']['time'] > 0
-    assert abs( (KPYSTONES * POSITIVE_BENCHMARK_TIME) - STATS['test']['kstones']) < 0.1
-    # assert STATS['test']['memory'] > 0
+    assert isinstance(stats['test']['time'], float)
+    assert isinstance(stats['test']['kstones'], float)
+    # assert isinstance(stats['test']['memory'], float)
+    assert stats['test']['time'] > 0
+    assert abs( (KPYSTONES * POSITIVE_BENCHMARK_TIME) - stats['test']['kstones']) < 0.1
+    # assert stats['test']['memory'] > 0
 
 
 @with_setup(setup_negative_fixture)
 def test_negative():
-    assert isinstance(STATS['test_neg']['time'], float)
-    assert isinstance(STATS['test_neg']['kstones'], float)
-    # assert isinstance(STATS['test_neg']['memory'], float)
-    assert STATS['test_neg']['time'] > 0
-    assert STATS['test_neg']['kstones'] < KPYSTONES / 1000
-    # assert STATS['test_neg']['memory'] > 0
+    assert isinstance(stats['test_neg']['time'], float)
+    assert isinstance(stats['test_neg']['kstones'], float)
+    # assert isinstance(stats['test_neg']['memory'], float)
+    assert stats['test_neg']['time'] > 0
+    assert stats['test_neg']['kstones'] < KPYSTONES / 1000
+    # assert stats['test_neg']['memory'] > 0
