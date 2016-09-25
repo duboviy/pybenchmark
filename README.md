@@ -1,9 +1,10 @@
-============
-pybenchmark
-============
+# pybenchmark
+
 [![Build Status](https://travis-ci.org/duboviy/pybenchmark.svg?branch=master)](https://travis-ci.org/duboviy/pybenchmark) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a7bdeaac57c431ab1263fcd5f19e4a9)](https://www.codacy.com/app/dubovoy/pybenchmark?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=duboviy/pybenchmark&amp;utm_campaign=Badge_Grade) [![PyPI](https://img.shields.io/pypi/v/pybenchmark.svg)](https://pypi.python.org/pypi/pybenchmark) [![Coverage Status](https://coveralls.io/repos/boennemann/badges/badge.svg)](https://coveralls.io/r/boennemann/badges) [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
-A benchmark utility used in performance tests.
+A benchmark utility used in speed / performance tests.
+
+## Why?
 
 When measuring execution time, the result depends on the computer hardware.
 To be able to produce a universal measure, the simplest way is to benchmark the
@@ -12,10 +13,29 @@ taken by a function can be translated to a universal value that can be compared 
 any computer. Python provides a benchmark utility in its test package that measures the duration
 of a sequence of well-chosen operations.
 
-============
-Examples
-============
-# TODO: add example of usage
+## Current features
+
+* Simple usage workflow
+* Decorator for profiling
+* A la carte usage of decorator in place
+* Work directly... no additional instalation
+
+## Instalation
+
+```
+pip install pybenchmark
+```
+
+## Examples
+
+```python
+>>> import pybenchmark
+>>> eat_cpu_time = lambda: 2**100000000
+>>> eat_it = pybenchmark.profile('you bad boy!')(eat_cpu_time)
+>>> please = eat_it()
+>>> profiler.stats
+{'you bad boy!': {'kstones': 14.306935999128555, 'time': 0.30902981758117676}}
+```
 
 [![forthebadge](http://forthebadge.com/images/badges/fuck-it-ship-it.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-by-hipsters.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
