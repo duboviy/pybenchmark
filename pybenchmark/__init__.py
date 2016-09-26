@@ -1,54 +1,57 @@
 """ A benchmark utility used in speed/performance tests. """
-import time
+import os
 import sys
+import time
+import psutil
 from test import pystone    # native python-core "PYSTONE" Benchmark Program
-
-# A Guppy-PE Primer (http://guppy-pe.sourceforge.net) is a third party framework that provides a
-# memory profiler called Heap, among other features.
-# Installed by requirments.txt. Custom installation >>> pip install guppy
-# from guppy import hpy
-
-# same condition in timeit (getting wall-time -> not process time)
-timer = time.clock if sys.platform == 'win32' else time.time
 
 
 # The result is a number of pystones per second the computer is able to perform,
 # and the time used to perform the benchmark, result depends on the hardware.
-BENCHTIME, PYSTONES = pystone.pystones()
-KPYSTONES = PYSTONES / 1000.0
+benchtime, pystones = pystone.pystones()
+kpystones = pystones / 1000.0
 stats = {}
-
-# _INIT_MEM_SIZE = 12     # 12 corresponds to the initial memory size after a setref call
 
 
 def profile(name='stats', stats=stats):
     """Calculates a duration and a memory size."""
     def _profile(function):
         def __profile(*args, **kw):
-            start_time = timer()
-            # profiler = hpy()
-            # profiler.setref()
-            # start = profiler.heap().size + _INIT_MEM_SIZE
+            start_time = _get_time()
+            start_memory = _get_memory_usage()
             try:
                 return function(*args, **kw)
             finally:
-                total = timer() - start_time
+                total = _get_time() - start_time
                 kstones = _seconds_to_kpystones(total)
-                # memory = profiler.heap().size - start
+                memory = _get_memory_usage() - start_memory
                 stats[name] = {'time': total,
-                               'kstones': kstones}
-                               # 'memory': memory}
+                               'kstones': kstones,
+                               'memory': memory}
         return __profile
     return _profile
 
 
+def _get_time():
+    """ Return wall-time -> not process time (same condition in timeit). """
+    timer = time.clock if sys.platform == 'win32' else time.time
+    return timer()
+
+
 def _seconds_to_kpystones(seconds):
     """ Return pystones amount of time performing operations. """
-    return (PYSTONES * seconds) / 1000
+    return (pystones * seconds) / 1000
+
+
+def _get_memory_usage():
+    """ Return the memory resident set size (top->RES) usage in bytes. """
+    process = psutil.Process(os.getpid())
+    mem = process.memory_info().rss
+    return mem
 
 
 if __name__ == '__main__':
-    """ Example of usage. """
+    # Example of usage.
     some_code = lambda: time.sleep(0.1)   # callable that will be decorated and measured
     decorated = profile('example_of_usage')(some_code)  # a la-carte decoration
     return_value = decorated()            # actual run/call of decorated callable
