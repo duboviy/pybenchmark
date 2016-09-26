@@ -1,5 +1,6 @@
 import time
 from nose.tools import with_setup
+import numbers
 
 from pybenchmark import profile, stats, kpystones
 
@@ -41,7 +42,7 @@ def test_dict_keys():
 def test_dict_values():
     assert isinstance(stats['test']['time'], float)
     assert isinstance(stats['test']['kstones'], float)
-    assert isinstance(stats['test']['memory'], long)
+    assert isinstance(stats['test']['memory'], numbers.Real)
     assert stats['test']['time'] > 0
     assert abs((kpystones * POSITIVE_BENCHMARK_TIME) - stats['test']['kstones']) < 0.1
     assert stats['test']['memory'] >= 0
@@ -51,7 +52,7 @@ def test_dict_values():
 def test_negative():
     assert isinstance(stats['test_neg']['time'], float)
     assert isinstance(stats['test_neg']['kstones'], float)
-    assert isinstance(stats['test_neg']['memory'], long)
+    assert isinstance(stats['test_neg']['memory'], numbers.Real)
     assert stats['test_neg']['time'] > 0
     assert stats['test_neg']['kstones'] < kpystones / 1000
     assert stats['test_neg']['memory'] >= 0
@@ -61,7 +62,7 @@ def test_negative():
 def test_check_memory():
     assert isinstance(stats['test_neg']['time'], float)
     assert isinstance(stats['test_neg']['kstones'], float)
-    assert isinstance(stats['test_neg']['memory'], long)
+    assert isinstance(stats['test_neg']['memory'], numbers.Real)
     assert stats['test_neg']['time'] > 0
     assert stats['test_neg']['kstones'] > 0
     assert stats['test_neg']['memory'] > 0
