@@ -19,3 +19,4 @@ pip.egg-info/
 .coverage
 coverage.xml
 .tox
+cover/

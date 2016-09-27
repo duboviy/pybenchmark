@@ -48,11 +48,3 @@ def _get_memory_usage():
     process = psutil.Process(os.getpid())
     mem = process.memory_info().rss
     return mem
-
-
-if __name__ == '__main__':
-    # Example of usage.
-    some_code = lambda: time.sleep(0.1)   # callable that will be decorated and measured
-    decorated = profile('example_of_usage')(some_code)  # a la-carte decoration
-    return_value = decorated()            # actual run/call of decorated callable
-    print(stats)
