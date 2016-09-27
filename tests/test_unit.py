@@ -44,7 +44,7 @@ def test_dict_values():
     assert isinstance(stats['test']['kstones'], float)
     assert isinstance(stats['test']['memory'], numbers.Real)
     assert stats['test']['time'] > 0
-    assert abs((kpystones * POSITIVE_BENCHMARK_TIME) - stats['test']['kstones']) < 0.1
+    assert abs((kpystones * POSITIVE_BENCHMARK_TIME) - stats['test']['kstones']) < 0.2
     assert stats['test']['memory'] >= 0
 
 
