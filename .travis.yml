@@ -12,5 +12,5 @@ env:
   - CODACY_PROJECT_TOKEN=4620615bad6043d3b623eff21a60130a
 # command to run tests
 script:
- - nosetests --cover-xml
+ - nosetests --with-coverage --cover-xml
  - python-codacy-coverage -r coverage.xml
