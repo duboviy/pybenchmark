@@ -1,5 +1,1 @@
-###### Requirements without Version Specifiers ######
 psutil
-nose
-coverage
-codacy-coverage
