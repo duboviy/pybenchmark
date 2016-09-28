@@ -60,17 +60,31 @@ pybenchmark.stats
 {'you bad boy!': {'kstones': 14.306935999128555, 'time': 0.30902981758117676, 'memory': 8096}}
 ```
 
-## License details
+## Supported python versions
+
+  * 2.7
+  * 3.3
+  * 3.4
+  * 3.5
+  * 3.6
+
+## PyPI
+
+* [Package](https://pypi.python.org/pypi/pybenchmark)
+* [Documentation](https://pythonhosted.org/pybenchmark/)
+
+## License
 
 You are free to copy, modify, and distribute pybenchmark, even for
 commercial purposes, without asking for permission.
 See for [LICENSE.txt](LICENSE.txt) details.
 
-## Contributing to this project
+## Contributing
 
 If you have suggestions for improving the pybenchmark, please [open an issue or
-pull request on GitHub]https://github.com/duboviy/pybenchmark/).
+pull request on GitHub](https://github.com/duboviy/pybenchmark/).
 
+## Badges
 
 [![forthebadge](http://forthebadge.com/images/badges/fuck-it-ship-it.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-by-hipsters.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
