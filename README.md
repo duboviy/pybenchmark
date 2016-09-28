@@ -1,5 +1,7 @@
 # pybenchmark
 
+by [Eugene Duboviy](https://duboviy.github.io/)
+
 [![Build Status](https://travis-ci.org/duboviy/pybenchmark.svg?branch=master)](https://travis-ci.org/duboviy/pybenchmark) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3a7bdeaac57c431ab1263fcd5f19e4a9)](https://www.codacy.com/app/dubovoy/pybenchmark?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=duboviy/pybenchmark&amp;utm_campaign=Badge_Grade) [![PyPI](https://img.shields.io/pypi/v/pybenchmark.svg)](https://pypi.python.org/pypi/pybenchmark) [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/3a7bdeaac57c431ab1263fcd5f19e4a9)](https://www.codacy.com/app/dubovoy/pybenchmark?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=duboviy/pybenchmark&amp;utm_campaign=Badge_Coverage) [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
 
 A benchmark utility used in speed / performance tests.
@@ -28,14 +30,47 @@ pip install pybenchmark
 
 ## Examples
 
+You can use profile decorator to wrap your code:
+
 ```python
->>> import pybenchmark
->>> eat_cpu_time = lambda: 2**100000000
->>> eat_it = pybenchmark.profile('you bad boy!')(eat_cpu_time)
->>> please = eat_it()
->>> profiler.stats
-{'you bad boy!': {'kstones': 14.306935999128555, 'time': 0.30902981758117676}}
+from pybenchmark import profile
+
+@profile()
+def some_code():
+    time.sleep(0.5)
+
+some_code()
+print(stats)
+{'stats':  {'kstones': 0.50012803077697754, 'time': 24.278059746455238, 'memory': 0}
 ```
+
+Also you can use decorator à la carte,
+if you don't want to edit/disturb your source code (for example, when writing tests):
+
+```python
+import pybenchmark
+
+eat_cpu_time = lambda: 2**100000000
+
+# using decorator à la carte below
+eat_it = pybenchmark.profile('you bad boy!')(eat_cpu_time)
+please = eat_it()
+
+pybenchmark.stats
+{'you bad boy!': {'kstones': 14.306935999128555, 'time': 0.30902981758117676, 'memory': 8096}}
+```
+
+## License details
+
+You are free to copy, modify, and distribute pybenchmark, even for
+commercial purposes, without asking for permission.
+See for [LICENSE.txt](LICENSE.txt) details.
+
+## Contributing to this project
+
+If you have suggestions for improving the pybenchmark, please [open an issue or
+pull request on GitHub]https://github.com/duboviy/pybenchmark/).
+
 
 [![forthebadge](http://forthebadge.com/images/badges/fuck-it-ship-it.svg)](http://forthebadge.com)
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-by-hipsters.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/built-with-swag.svg)](http://forthebadge.com)
@@ -47,3 +82,5 @@ pip install pybenchmark
 [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 [![forthebadge](http://forthebadge.com/images/badges/makes-people-smile.svg)](http://forthebadge.com)
+
+
