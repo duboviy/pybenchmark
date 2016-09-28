@@ -6,11 +6,16 @@ python:
   - "3.5"
   - "3.5-dev" # 3.5 development branch
   - "nightly" # currently points to 3.6-dev
+
 # command to install dependencies
 install: "pip install -r requirements.txt"
+
 env:
   - CODACY_PROJECT_TOKEN=4620615bad6043d3b623eff21a60130a
-# command to run tests
-script:
- - nosetests --with-coverage --cover-xml
- - python-codacy-coverage -r coverage.xml
+
+ # command to run tests
+script: nosetests --with-coverage --cover-package=pybenchmark tests/
+
+after_success:
+  - coverage xml
+  - python-codacy-coverage -v -r coverage.xml
