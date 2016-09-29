@@ -70,16 +70,16 @@ def test_check_memory():
 
 def test_cpu_info():
     cpu = CpuInfo()
-    assert cpu.__str__
-    assert cpu.__str__ == cpu.__repr__
+    assert cpu.__str__()
+    assert cpu.__str__() == cpu.__repr__()
     assert cpu.dict().keys()
     assert cpu.search('CPU Mhz')
 
 
 def test_mem_info():
     mem = MemInfo()
-    assert mem.__str__
-    assert mem.__str__ == mem.__repr__
+    assert mem.__str__()
+    assert mem.__str__() == mem.__repr__()
     assert mem.dict().keys()
     assert mem.search('Swap')
     assert mem.get('Inactive(anon)')
