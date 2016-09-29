@@ -22,10 +22,15 @@ of a sequence of well-chosen operations.
 * A la carte usage of decorator in place
 * Work directly... no additional instalation
 
-## Instalation
+## Installation:
 
+From source use:
 ```
-pip install pybenchmark
+$ python setup.py install
+```
+or install from PyPi:
+```
+$ pip install pybenchmark
 ```
 
 ## Examples
@@ -75,9 +80,7 @@ pybenchmark.stats
 
 ## License
 
-You are free to copy, modify, and distribute pybenchmark, even for
-commercial purposes, without asking for permission.
-See for [LICENSE.txt](LICENSE.txt) details.
+pybenchmark is a **MIT** licensed library. See [LICENSE.txt](LICENSE.txt) for details.
 
 ## Contributing
 
