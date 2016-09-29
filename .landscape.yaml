@@ -1,0 +1,6 @@
+strictness: medium
+autodetect: yes
+
+pylint:
+  disable:
+    - W0102
