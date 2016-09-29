@@ -2,8 +2,12 @@
 import os
 import sys
 import time
-import psutil
 from test import pystone    # native python-core "PYSTONE" Benchmark Program
+
+import psutil
+
+from meminfo import MemInfo
+from cpuinfo import CpuInfo
 
 
 # The result is a number of pystones per second the computer is able to perform,

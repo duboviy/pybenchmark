@@ -2,7 +2,7 @@ import time
 from nose.tools import with_setup
 import numbers
 
-from pybenchmark import profile, stats, kpystones
+from pybenchmark import profile, stats, kpystones, CpuInfo, MemInfo
 
 
 POSITIVE_BENCHMARK_TIME = 0.1  # sec
@@ -66,3 +66,20 @@ def test_check_memory():
     assert stats['test_neg']['time'] > 0
     assert stats['test_neg']['kstones'] > 0
     assert stats['test_neg']['memory'] > 0
+
+
+def test_cpu_info():
+    cpu = CpuInfo()
+    assert cpu.__str__
+    assert cpu.__str__ == cpu.__repr__
+    assert cpu.dict().keys()
+    assert cpu.search('CPU Mhz')
+
+
+def test_mem_info():
+    mem = MemInfo()
+    assert mem.__str__
+    assert mem.__str__ == mem.__repr__
+    assert mem.dict().keys()
+    assert mem.search('Swap')
+    assert mem.get('Inactive(anon)')
