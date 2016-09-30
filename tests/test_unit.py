@@ -1,5 +1,7 @@
+import sys
 import time
 import numbers
+import operator
 
 from nose.tools import with_setup
 
@@ -66,7 +68,11 @@ def test_check_memory():
     assert isinstance(stats['test_neg']['memory'], numbers.Real)
     assert stats['test_neg']['time'] > 0
     assert stats['test_neg']['kstones'] > 0
-    assert stats['test_neg']['memory'] > 0
+
+    is_pypy = '__pypy__' in sys.builtin_module_names
+    op = operator.ge if is_pypy else operator.gt
+    assert op(stats['test_neg']['memory'], 0)
+
 
 
 def test_cpu_info_smoke():
