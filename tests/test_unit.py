@@ -57,7 +57,7 @@ def test_negative():
     assert isinstance(stats['test_neg']['kstones'], float)
     assert isinstance(stats['test_neg']['memory'], numbers.Real)
     assert stats['test_neg']['time'] > 0
-    assert stats['test_neg']['kstones'] < kpystones / 1000
+    assert stats['test_neg']['kstones'] < kpystones / 100
     assert stats['test_neg']['memory'] >= 0
 
 
@@ -79,7 +79,7 @@ def test_cpu_info_smoke():
     """ Works only on UNIX-based machine (because of /proc/cpuinfo file is used). """
     cpu = CpuInfo()
     assert cpu.__str__()
-    assert cpu.__repr__()
+    assert cpu.__repr__() == cpu.__str__()
     assert cpu.dict().keys()
     assert cpu.search('CPU Mhz')
 
@@ -88,7 +88,7 @@ def test_mem_info_smoke():
     """ Works only on UNIX-based machine (because of /proc/meminfo file is used). """
     mem = MemInfo()
     assert mem.__str__()
-    assert mem.__repr__()
+    assert mem.__repr__() == mem.__str__()
     assert mem.dict().keys()
     assert mem.search('Swap')
     assert mem.get('Inactive(anon)')
