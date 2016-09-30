@@ -1,4 +1,4 @@
-<h1><img src="https://raw.githubusercontent.com/duboviy/pybenchmark/master/img/logo.png" height=85 alt="logo" title="logo"> pybenchmark</h1>
+<h1><img src="https://raw.githubusercontent.com/duboviy/pybenchmark/master/logo.png" height=85 alt="logo" title="logo"> pybenchmark</h1>
 
 by [Eugene Duboviy](https://duboviy.github.io/)
 
