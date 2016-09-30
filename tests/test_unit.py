@@ -1,6 +1,7 @@
 import time
-from nose.tools import with_setup
 import numbers
+
+from nose.tools import with_setup
 
 from pybenchmark import profile, stats, kpystones, CpuInfo, MemInfo
 
@@ -68,7 +69,8 @@ def test_check_memory():
     assert stats['test_neg']['memory'] > 0
 
 
-def test_cpu_info():
+def test_cpu_info_smoke():
+    """ Works only on UNIX-based machine (because of /proc/cpuinfo file is used). """
     cpu = CpuInfo()
     assert cpu.__str__()
     assert cpu.__repr__()
@@ -76,10 +78,39 @@ def test_cpu_info():
     assert cpu.search('CPU Mhz')
 
 
-def test_mem_info():
+def test_mem_info_smoke():
+    """ Works only on UNIX-based machine (because of /proc/meminfo file is used). """
     mem = MemInfo()
     assert mem.__str__()
     assert mem.__repr__()
     assert mem.dict().keys()
     assert mem.search('Swap')
     assert mem.get('Inactive(anon)')
+
+
+def test_cpu_info_detailed():
+    cpu_info_stub = './tests/stubs/cpu'
+    cpu = CpuInfo(cpu_info_stub)
+    content = '\n'.join(line.strip() for line in open(cpu_info_stub, 'r'))
+    assert cpu.__str__() == cpu.__repr__() == content
+    assert cpu.dict().keys()
+    assert int(cpu.dict()['1']['cpu cores']) == 2
+    cpu_mhz = ['cpu MHz\t\t: 1600.257\n',
+               'cpu MHz\t\t: 1600.523\n',
+               'cpu MHz\t\t: 1595.476\n',
+               'cpu MHz\t\t: 1599.062\n']
+    assert cpu.search('CPU Mhz') == cpu_mhz
+
+
+def test_mem_info_detailed():
+    mem_info_stub = './tests/stubs/mem'
+    mem = MemInfo(mem_info_stub)
+    content = '\n'.join(line.strip() for line in open(mem_info_stub, 'r'))
+    assert mem.__str__() == mem.__repr__() == content
+    assert mem.dict().keys()
+    assert mem.dict()['Active(anon)'] == '1794356 kB'
+    swap_search = ['SwapCached:         7576 kB\n',
+                   'SwapTotal:      16776188 kB\n',
+                   'SwapFree:       16639112 kB\n']
+    assert mem.search('Swap') == swap_search
+    assert mem.get('Inactive(anon)') == 492656

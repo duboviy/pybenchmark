@@ -174,10 +174,9 @@ bogomips	: 6784.56
 clflush size	: 64
 cache_alignment	: 64
 address sizes	: 36 bits physical, 48 bits virtual
-power management:
 ```
 
-- Return output as dict:
+Return output as dict:
 
 ```
 >>> cpu.dict()
@@ -293,7 +292,7 @@ power management:
 }
 ```
 
-- Search (is case insensitive):
+Search (is case insensitive):
 
 ```
 >>> cpu.search('CPU Mhz')
@@ -351,7 +350,7 @@ DirectMap4k:       83644 kB
 DirectMap2M:     8202240 kB
 ```
 
-- Return output as dict:
+Return output as dict:
 
 ```
 >>> mem.dict()
@@ -402,14 +401,14 @@ DirectMap2M:     8202240 kB
 }
 ```
 
-- Search (is case insensitive):
+Search (is case insensitive):
 
 ```
 >>> mem.search('Swap')
 ['SwapCached:         7576 kB\n', 'SwapTotal:      16776188 kB\n', 'SwapFree:       16639112 kB\n']
 ```
 
-- Get memory usage as int (is case sensitive):
+Get memory usage as int (is case sensitive):
 
 ```
 >>> mem.get('Inactive(anon)')
