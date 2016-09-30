@@ -34,6 +34,19 @@ or install from PyPi:
 $ pip install pybenchmark
 ```
 
+## Supported python versions
+
+  * 2.7
+  * 3.3
+  * 3.4
+  * 3.5
+  * 3.6
+
+## PyPI
+
+* [Package](https://pypi.python.org/pypi/pybenchmark)
+* [Documentation](https://pythonhosted.org/pybenchmark/)
+
 ## Basic usage examples
 
 You can use profile decorator to wrap your code:
@@ -415,19 +428,6 @@ Get memory usage as int (is case sensitive):
 492656
 ```
 
-
-## Supported python versions
-
-  * 2.7
-  * 3.3
-  * 3.4
-  * 3.5
-  * 3.6
-
-## PyPI
-
-* [Package](https://pypi.python.org/pypi/pybenchmark)
-* [Documentation](https://pythonhosted.org/pybenchmark/)
 
 ## License
 
