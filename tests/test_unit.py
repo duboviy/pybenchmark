@@ -74,12 +74,11 @@ def test_check_memory():
     assert op(stats['test_neg']['memory'], 0)
 
 
-
 def test_cpu_info_smoke():
     """ Works only on UNIX-based machine (because of /proc/cpuinfo file is used). """
     cpu = CpuInfo()
     assert cpu.__str__()
-    assert cpu.__repr__() == cpu.__str__()
+    assert cpu.__repr__()
     assert cpu.dict().keys()
     assert cpu.search('CPU Mhz')
 
@@ -88,7 +87,7 @@ def test_mem_info_smoke():
     """ Works only on UNIX-based machine (because of /proc/meminfo file is used). """
     mem = MemInfo()
     assert mem.__str__()
-    assert mem.__repr__() == mem.__str__()
+    assert mem.__repr__()
     assert mem.dict().keys()
     assert mem.search('Swap')
     assert mem.get('Inactive(anon)')
