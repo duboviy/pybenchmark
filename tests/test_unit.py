@@ -95,11 +95,7 @@ def test_cpu_info_detailed():
     assert cpu.__str__() == cpu.__repr__() == content
     assert cpu.dict().keys()
     assert int(cpu.dict()['1']['cpu cores']) == 2
-    cpu_mhz = ['cpu MHz\t\t: 1600.257\n',
-               'cpu MHz\t\t: 1600.523\n',
-               'cpu MHz\t\t: 1595.476\n',
-               'cpu MHz\t\t: 1599.062\n']
-    assert cpu.search('CPU Mhz') == cpu_mhz
+    assert len(cpu.search('CPU Mhz')) == 4
 
 
 def test_mem_info_detailed():
@@ -109,8 +105,5 @@ def test_mem_info_detailed():
     assert mem.__str__() == mem.__repr__() == content
     assert mem.dict().keys()
     assert mem.dict()['Active(anon)'] == '1794356 kB'
-    swap_search = ['SwapCached:         7576 kB\n',
-                   'SwapTotal:      16776188 kB\n',
-                   'SwapFree:       16639112 kB\n']
-    assert mem.search('Swap') == swap_search
+    assert len(mem.search('Swap')) == 3
     assert mem.get('Inactive(anon)') == 492656
