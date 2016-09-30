@@ -95,7 +95,7 @@ def test_cpu_info_detailed():
     assert cpu.__str__() == cpu.__repr__() == content
     assert cpu.dict().keys()
     assert int(cpu.dict()['1']['cpu cores']) == 2
-    assert len(list(cpu.search('CPU Mhz'))) == 4
+    assert len(cpu.search('CPU Mhz')) == 4
 
 
 def test_mem_info_detailed():
@@ -105,5 +105,5 @@ def test_mem_info_detailed():
     assert mem.__str__() == mem.__repr__() == content
     assert mem.dict().keys()
     assert mem.dict()['Active(anon)'] == '1794356 kB'
-    assert len(list(mem.search('Swap'))) == 3
+    assert len(mem.search('Swap')) == 3
     assert mem.get('Inactive(anon)') == 492656

@@ -34,5 +34,5 @@ class CpuInfo(object):
     def search(self, regex):
         with self._file_obj() as f:
             matcher = re.compile(regex, re.IGNORECASE)
-            match = filter(matcher.match, f)
+            match = list(filter(matcher.match, f))
         return match
