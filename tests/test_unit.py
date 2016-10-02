@@ -2,10 +2,13 @@ import sys
 import time
 import numbers
 import operator
+import platform
+from test.pystone import main as my_expensive_code
 
 from nose.tools import with_setup
 
 from pybenchmark import profile, stats, kpystones, CpuInfo, MemInfo
+from pybenchmark.chrome.profiler import Profiler
 
 
 POSITIVE_BENCHMARK_TIME = 0.1  # sec
@@ -75,8 +78,11 @@ def test_check_memory():
 
 
 def test_cpu_info_smoke():
-    """ Works only on UNIX-based machine (because of /proc/cpuinfo file is used). """
-    cpu = CpuInfo()
+    if platform.system() == 'Windows':
+        cpu_info_stub = './tests/stubs/cpu'
+        cpu = CpuInfo(cpu_info_stub)
+    else:
+        cpu = CpuInfo()
     assert cpu.__str__()
     assert cpu.__repr__()
     assert cpu.dict().keys()
@@ -84,8 +90,11 @@ def test_cpu_info_smoke():
 
 
 def test_mem_info_smoke():
-    """ Works only on UNIX-based machine (because of /proc/meminfo file is used). """
-    mem = MemInfo()
+    if platform.system() == 'Windows':
+        mem_info_stub = './tests/stubs/mem'
+        mem = MemInfo(mem_info_stub)
+    else:
+        mem = MemInfo()
     assert mem.__str__()
     assert mem.__repr__()
     assert mem.dict().keys()
@@ -112,3 +121,12 @@ def test_mem_info_detailed():
     assert mem.dict()['Active(anon)'] == '1794356 kB'
     assert len(mem.search('Swap')) == 3
     assert mem.get('Inactive(anon)') == 492656
+
+
+def test_chrome_profiler_smoke():
+    profiler = Profiler()
+    profiler.start()
+    my_expensive_code()
+    profiler.stop()
+    assert profiler.output() != '{}'
+

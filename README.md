@@ -80,6 +80,20 @@ pybenchmark.stats
 {'you bad boy!': {'kstones': 14.306935999128555, 'time': 0.30902981758117676, 'memory': 8096}}
 ```
 
+You can use module for visualizing Python code profiles using the Chrome developer tools:
+
+```python
+from pybenchmark.chrome.profiler import Profiler
+
+profiler = Profiler()
+profiler.start()
+my_expensive_code()
+profiler.stop()
+
+with open('my.cpuprofile', 'w') as f:
+    f.write(profiler.output())
+```
+
 You can get CPU machine details information (on LINUX-based systems): 
 
 ```
