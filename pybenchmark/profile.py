@@ -1,10 +1,9 @@
 """ A benchmark utility used in speed/performance tests. """
-import os
-import sys
-import time
-from test import pystone    # native python-core "PYSTONE" Benchmark Program
+from os import getpid
+from test import pystone            # native python-core "PYSTONE" Benchmark Program
+from timeit import default_timer as timer
 
-import psutil
+from psutil import Process
 
 
 # The result is a number of pystones per second the computer is able to perform,
@@ -16,15 +15,15 @@ stats = {}
 
 # pylint: disable-msg=W0102
 def profile(name='stats', _stats=stats):
-    """Calculates a duration and a memory size."""
+    """Calculates a duration (wall clock time, not the CPU time) and a memory size."""
     def _profile(function):
         def __profile(*args, **kw):
-            start_time = _get_time()
+            start_time = timer()
             start_memory = _get_memory_usage()
             try:
                 return function(*args, **kw)
             finally:
-                total = _get_time() - start_time
+                total = timer() - start_time
                 kstones = _seconds_to_kpystones(total)
                 memory = _get_memory_usage() - start_memory
                 _stats[name] = {'time': total,
@@ -34,12 +33,6 @@ def profile(name='stats', _stats=stats):
     return _profile
 
 
-def _get_time():
-    """ Return wall-time -> not process time (same condition in timeit). """
-    timer = time.clock if sys.platform == 'win32' else time.time
-    return timer()
-
-
 def _seconds_to_kpystones(seconds):
     """ Return pystones amount of time performing operations. """
     return (pystones * seconds) / 1000
@@ -47,6 +40,6 @@ def _seconds_to_kpystones(seconds):
 
 def _get_memory_usage():
     """ Return the memory resident set size (top->RES) usage in bytes. """
-    process = psutil.Process(os.getpid())
+    process = Process(getpid())
     mem = process.memory_info().rss
     return mem
