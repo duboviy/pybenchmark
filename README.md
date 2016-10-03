@@ -31,7 +31,7 @@ $ pip install pybenchmark
 ```
 Or using alternative command:
 ```
-% pip install https://github.com/duboviy/pybenchmark/archive/master.zip
+$ pip install https://github.com/duboviy/pybenchmark/archive/master.zip
 ```
 Or from source use:
 ```
