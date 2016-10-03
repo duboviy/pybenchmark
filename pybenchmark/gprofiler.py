@@ -96,7 +96,8 @@ class GProfiler(object):
         self.root.add(stack, self._id_generator)
         self.samples.append(self.nextId)
 
-    def _format_frame(self, frame):
+    @staticmethod
+    def _format_frame(frame):
         return '{}({})'.format(frame.f_code.co_name,
                                frame.f_globals.get('__name__'))
 
@@ -118,7 +119,8 @@ class GProfiler(object):
         self.started = timeit.default_timer()
         print("# Running in profile mode. #")
 
-    def stop(self):
+    @staticmethod
+    def stop():
         sys.setprofile(None)
         print("# Profile mode stopped. #")
 
@@ -126,7 +128,7 @@ class GProfiler(object):
         self.start()
         return self
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, type_, value, traceback_):
         self.stop()
         filename = './pybenchmark_%s_.cpuprofile' % os.getpid()
         with open(filename, 'w') as f:
