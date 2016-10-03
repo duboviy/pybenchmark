@@ -83,9 +83,9 @@ pybenchmark.stats
 You can use module for visualizing Python code profiles using the Chrome developer tools:
 
 ```python
-from pybenchmark.chrome.profiler import Profiler
+from pybenchmark import GProfiler
 
-profiler = Profiler()
+profiler = GProfiler()
 profiler.start()
 my_expensive_code()
 profiler.stop()
@@ -93,6 +93,13 @@ profiler.stop()
 with open('my.cpuprofile', 'w') as f:
     f.write(profiler.output())
 ```
+
+Then load json file into chrome developer tools timeline.
+To get the timeline chart load the file into Profiles tool from Chrome Dev Tools.
+There is a "Load" button just under the list of profiles.
+Then timeline-chart can be obtained by changing Heavy(Bottom Up) option to Chart.
+<img src="http://i.stack.imgur.com/To8Nw.png" alt="&quot;Load&quot; button on the Profiles tab in Chrome DevTools">
+
 
 You can get CPU machine details information (on LINUX-based systems): 
 

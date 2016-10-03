@@ -1,5 +1,7 @@
+import os
 import sys
 import time
+import json
 import numbers
 import operator
 import platform
@@ -7,8 +9,8 @@ from test.pystone import main as my_expensive_code
 
 from nose.tools import with_setup
 
-from pybenchmark import profile, stats, kpystones, CpuInfo, MemInfo
-from pybenchmark.chrome.profiler import Profiler
+from pybenchmark import profile, stats, kpystones, CpuInfo, MemInfo, GProfiler
+from pybenchmark.gprofiler import Node
 
 
 POSITIVE_BENCHMARK_TIME = 0.1  # sec
@@ -50,7 +52,7 @@ def test_dict_values():
     assert isinstance(stats['test']['kstones'], float)
     assert isinstance(stats['test']['memory'], numbers.Real)
     assert stats['test']['time'] > 0
-    assert abs((kpystones * POSITIVE_BENCHMARK_TIME) - stats['test']['kstones']) < 0.2
+    assert abs((kpystones * POSITIVE_BENCHMARK_TIME) - stats['test']['kstones']) < (kpystones / 10)
     assert stats['test']['memory'] >= 0
 
 
@@ -124,9 +126,42 @@ def test_mem_info_detailed():
 
 
 def test_chrome_profiler_smoke():
-    profiler = Profiler()
+    profiler = GProfiler()
     profiler.start()
     my_expensive_code()
     profiler.stop()
-    assert profiler.output() != '{}'
 
+    assert isinstance(profiler.output(), str)
+    assert profiler.output() != json.dumps({})
+    assert 'startTime' in profiler.output()
+    assert 'endTime' in profiler.output()
+    assert 'timestamps' in profiler.output()
+    assert 'samples' in profiler.output()
+    assert 'head' in profiler.output()
+
+
+def test_node_smoke():
+    root = Node('head', 1)
+    id_gen = GProfiler()._id_generator
+    root.add(['1', '2'], id_gen)
+    data = root.serialize()
+
+    assert isinstance(data, dict)
+    assert 'functionName' in data
+    assert 'hitCount' in data
+    assert 'children' in data
+    assert 'scriptId' in data
+    assert 'lineNumber' in data
+    assert 'columnNumber' in data
+    assert 'deoptReason' in data
+    assert 'id' in data
+    assert 'callUID' in data
+    assert isinstance(data['children'], list)
+
+
+def test_chrome_profiler_context_mgr_smoke():
+    with GProfiler():
+        my_expensive_code()
+
+    filename = './pybenchmark_%s_.cpuprofile' % os.getpid()
+    assert os.path.isfile(filename)

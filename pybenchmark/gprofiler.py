@@ -12,6 +12,7 @@ In a gevented environnment, context switches can make things confusing. Data
 collection can be limited to a single greenlet by passing
 >>> profiler = Profiler(target_greenlet = gevent.getcurrent())
 """
+import os
 import sys
 import json
 import timeit
@@ -57,7 +58,7 @@ class Node(object):
         child.add(frames[1:], id_gen)
 
 
-class Profiler(object):
+class GProfiler(object):
 
     def __init__(self, target_greenlet=None, interval=0.0001):
         self.target_greenlet_id = (
@@ -119,3 +120,14 @@ class Profiler(object):
 
     def stop(self):
         sys.setprofile(None)
+
+    def __enter__(self):
+        sys.setprofile(self._profile)
+        self.started = timeit.default_timer()
+
+    def __exit__(self, type, value, traceback):
+        sys.setprofile(None)
+        filename = './pybenchmark_%s_.cpuprofile' % os.getpid()
+        with open(filename, 'w') as f:
+            f.write(self.output())
+            print(("Written profile file '%s'." % (filename)))
