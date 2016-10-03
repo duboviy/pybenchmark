@@ -25,13 +25,17 @@ and pythonic way to get performance data.
 
 ## Installation:
 
-From source use:
-```
-$ python setup.py install
-```
-or install from PyPi:
+Install from PyPI:
 ```
 $ pip install pybenchmark
+```
+Or using alternative command:
+```
+pip install https://github.com/duboviy/pybenchmark/archive/master.zip
+```
+Or from source use:
+```
+$ python setup.py install
 ```
 
 ## Supported python versions
@@ -108,7 +112,7 @@ To get the timeline chart load the file into Profiles tool from Chrome Dev Tools
 There is a "Load" button just under the list of profiles.
 Then timeline-chart can be obtained by changing Heavy(Bottom Up) option to Chart.
 <img src="http://i.stack.imgur.com/To8Nw.png" alt="&quot;Load&quot; button on the Profiles tab in Chrome DevTools">
-
+You can use it with or without gevent framework.
 
 You can get CPU machine details information (on LINUX-based systems): 
 
