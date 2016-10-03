@@ -1,1 +1,4 @@
 psutil
+
+# not necessary to install, optionally used only in chrome profiler
+gevent

@@ -1,5 +1,9 @@
 ###### Requirements without Version Specifiers ######
 psutil
+
+# not necessary to install, optionally used only in chrome profiler
+gevent
+
 nose
 coverage
 codacy-coverage
