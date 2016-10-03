@@ -140,6 +140,13 @@ def test_chrome_profiler_smoke():
     assert 'head' in profiler.output()
 
 
+def test_chrome_profiler_smoke_empty():
+    profiler = GProfiler()
+    profiler.start()
+    profiler.stop()
+    assert isinstance(profiler.output(), str)
+
+
 def test_node_smoke():
     root = Node('head', 1)
     id_gen = GProfiler()._id_generator
@@ -160,8 +167,16 @@ def test_node_smoke():
 
 
 def test_chrome_profiler_context_mgr_smoke():
-    with GProfiler():
+    with GProfiler() as profiler:
         my_expensive_code()
 
     filename = './pybenchmark_%s_.cpuprofile' % os.getpid()
     assert os.path.isfile(filename)
+
+    assert isinstance(profiler.output(), str)
+    assert profiler.output() != json.dumps({})
+    assert 'startTime' in profiler.output()
+    assert 'endTime' in profiler.output()
+    assert 'timestamps' in profiler.output()
+    assert 'samples' in profiler.output()
+    assert 'head' in profiler.output()

@@ -115,18 +115,19 @@ class GProfiler(object):
 
     def start(self):
         sys.setprofile(self._profile)
-        if not self.started:
-            self.started = timeit.default_timer()
+        self.started = timeit.default_timer()
+        print("# Running in profile mode. #")
 
     def stop(self):
         sys.setprofile(None)
+        print("# Profile mode stopped. #")
 
     def __enter__(self):
-        sys.setprofile(self._profile)
-        self.started = timeit.default_timer()
+        self.start()
+        return self
 
     def __exit__(self, type, value, traceback):
-        sys.setprofile(None)
+        self.stop()
         filename = './pybenchmark_%s_.cpuprofile' % os.getpid()
         with open(filename, 'w') as f:
             f.write(self.output())

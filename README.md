@@ -94,6 +94,15 @@ with open('my.cpuprofile', 'w') as f:
     f.write(profiler.output())
 ```
 
+Or you can use context manager:
+
+```python
+with GProfiler() as profiler:
+    my_expensive_code()
+
+# File with name './pybenchmark_%s_.cpuprofile' % os.getpid() would be created
+```
+
 Then load json file into chrome developer tools timeline.
 To get the timeline chart load the file into Profiles tool from Chrome Dev Tools.
 There is a "Load" button just under the list of profiles.
