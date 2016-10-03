@@ -31,7 +31,7 @@ $ pip install pybenchmark
 ```
 Or using alternative command:
 ```
-pip install https://github.com/duboviy/pybenchmark/archive/master.zip
+% pip install https://github.com/duboviy/pybenchmark/archive/master.zip
 ```
 Or from source use:
 ```
@@ -111,8 +111,9 @@ Then load json file into chrome developer tools timeline.
 To get the timeline chart load the file into Profiles tool from Chrome Dev Tools.
 There is a "Load" button just under the list of profiles.
 Then timeline-chart can be obtained by changing Heavy(Bottom Up) option to Chart.
-<img src="http://i.stack.imgur.com/To8Nw.png" alt="&quot;Load&quot; button on the Profiles tab in Chrome DevTools">
 You can use it with or without gevent framework.
+<img src="http://i.stack.imgur.com/To8Nw.png" alt="&quot;Load&quot; button on the Profiles tab in Chrome DevTools">
+
 
 You can get CPU machine details information (on LINUX-based systems): 
 
