@@ -3,9 +3,14 @@ autodetect: yes
 
 pylint:
   disable:
+    # W0102: Dangerous default value %s as argument
     - W0102
+    # W0612: Unused variable %r
+    - W0612
+    # W0613: Unused argument %r
+    - W0613
 
 pyflakes:
   disable:
-    # F401: unused import; same story
+    # F401: unused import
     - F401

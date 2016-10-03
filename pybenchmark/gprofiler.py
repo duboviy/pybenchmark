@@ -75,7 +75,7 @@ class GProfiler(object):
         self.nextId += 1
         return self.nextId
 
-    def _profile(self, frame, event, arg):
+    def _profile(self, frame, event, arg):  # pylint: disable=W0613
         if event == 'call':
             self._record_frame(frame.f_back)
 
