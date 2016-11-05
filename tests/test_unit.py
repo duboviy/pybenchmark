@@ -7,6 +7,7 @@ import operator
 import platform
 from test.pystone import main as my_expensive_code
 
+import six
 from nose.tools import with_setup
 
 from pybenchmark import profile, stats, kpystones, CpuInfo, MemInfo, GProfiler
@@ -131,7 +132,7 @@ def test_chrome_profiler_smoke():
     my_expensive_code()
     profiler.stop()
 
-    assert isinstance(profiler.output(), str)
+    assert isinstance(profiler.output(), six.string_types)
     assert profiler.output() != json.dumps({})
     assert 'startTime' in profiler.output()
     assert 'endTime' in profiler.output()
@@ -144,7 +145,7 @@ def test_chrome_profiler_smoke_empty():
     profiler = GProfiler()
     profiler.start()
     profiler.stop()
-    assert isinstance(profiler.output(), str)
+    assert isinstance(profiler.output(), six.string_types)
 
 
 def test_node_smoke():
@@ -173,7 +174,7 @@ def test_chrome_profiler_context_mgr_smoke():
     filename = './pybenchmark_%s_.cpuprofile' % os.getpid()
     assert os.path.isfile(filename)
 
-    assert isinstance(profiler.output(), str)
+    assert isinstance(profiler.output(), six.string_types)
     assert profiler.output() != json.dumps({})
     assert 'startTime' in profiler.output()
     assert 'endTime' in profiler.output()

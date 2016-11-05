@@ -3,6 +3,7 @@ import re
 
 
 class CpuInfo(object):
+
     def __init__(self, path='/proc/cpuinfo'):
         self.path = path
 
@@ -14,8 +15,7 @@ class CpuInfo(object):
             lines = [line.strip() for line in f]
         return '\n'.join(lines)
 
-    def __repr__(self):
-        return self.__str__()
+    __repr__ = __str__
 
     def dict(self):
         d = {}

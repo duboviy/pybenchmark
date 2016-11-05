@@ -3,6 +3,7 @@ import re
 
 
 class MemInfo(object):
+
     def __init__(self, path='/proc/meminfo'):
         self.path = path
 

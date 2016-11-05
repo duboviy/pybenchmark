@@ -4,6 +4,8 @@ psutil
 # not necessary to install, optionally used only in chrome profiler
 gevent
 
+six
+
 nose
 coverage
 codacy-coverage

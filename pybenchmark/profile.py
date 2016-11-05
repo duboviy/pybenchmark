@@ -35,11 +35,10 @@ def profile(name='stats', _stats=stats):
 
 def _seconds_to_kpystones(seconds):
     """ Return pystones amount of time performing operations. """
-    return (pystones * seconds) / 1000
+    return kpystones * seconds
 
 
 def _get_memory_usage():
     """ Return the memory resident set size (top->RES) usage in bytes. """
     process = Process(getpid())
-    mem = process.memory_info().rss
-    return mem
+    return process.memory_info().rss
