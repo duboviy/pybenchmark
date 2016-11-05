@@ -5,7 +5,11 @@ python:
   - "3.4"
   - "3.5"
   - "3.5-dev" # 3.5 development branch
-  - "nightly" # currently points to 3.6-dev
+
+# Disabled for now since cause more pain than gain
+#  - "nightly" # currently points to 3.6-dev
+#  - "pypy"
+#  - "pypy3"
 
 #  # works properly without installed gevent, so currenly commented to not fail on CI
 #  # does not have headers provided, please ask https://launchpad.net/~pypy/+archive/ppa
