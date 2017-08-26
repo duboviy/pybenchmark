@@ -19,4 +19,5 @@ test:
   override:
     - nosetests --with-coverage --cover-package=pybenchmark tests/
     - coverage xml
-    - python-codacy-coverage -v -r coverage.xml
+#    Disabled for now cause already done on Travis CI side
+#    - python-codacy-coverage -v -r coverage.xml
