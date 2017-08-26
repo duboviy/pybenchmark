@@ -57,15 +57,15 @@ $ python setup.py install
 You can use profile decorator to wrap your code:
 
 ```python
-from pybenchmark import profile
+import pybenchmark
 
-@profile()
+@pybenchmark.profile()
 def some_code():
     time.sleep(0.5)
 
 some_code()
-print(stats)
-{'stats':  {'kstones': 0.50012803077697754, 'time': 24.278059746455238, 'memory': 0}
+print(pybenchmark.stats)
+{'stats':  {'kstones': 24.278059746455238, 'time': 0.50012803077697754, 'memory': 0}
 ```
 
 Also you can use decorator à la carte,
@@ -78,9 +78,9 @@ eat_cpu_time = lambda: 2**100000000
 
 # using decorator à la carte below
 eat_it = pybenchmark.profile('you bad boy!')(eat_cpu_time)
-please = eat_it()
+eat_it()
 
-pybenchmark.stats
+print(pybenchmark.stats)
 {'you bad boy!': {'kstones': 14.306935999128555, 'time': 0.30902981758117676, 'memory': 8096}}
 ```
 
@@ -104,7 +104,7 @@ Or you can use context manager:
 with GProfiler() as profiler:
     my_expensive_code()
 
-# File with name './pybenchmark_%s_.cpuprofile' % os.getpid() would be created
+# file with name './pybenchmark_%s_.cpuprofile' % os.getpid() would be created
 ```
 
 Then load json file into chrome developer tools timeline.
