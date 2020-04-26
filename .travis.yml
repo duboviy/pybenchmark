@@ -1,10 +1,11 @@
 language: python
 python:
   - "2.7"
-  - "3.3"
   - "3.4"
   - "3.5"
   - "3.6"
+  - "3.7"
+  - "3.8"
 
 # Disabled for now since cause more pain than gain
 #  - "nightly" # currently points to 3.6-dev
